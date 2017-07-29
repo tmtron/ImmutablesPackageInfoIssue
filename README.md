@@ -33,3 +33,4 @@ Software Versions:
 
 Refrences:
 * [StackOverflow question "Immutables-library generates the same immutable class twice"](https://stackoverflow.com/questions/45393034/immutables-library-generates-the-same-immutable-class-twice)
+* [StackOverflow question "How to exclude package-info.java files from dex?"](https://stackoverflow.com/a/43026334/6287240)
