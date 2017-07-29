@@ -6,7 +6,6 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     compileOnly "org.immutables:value:${rootProject.ext.VERSION_IMMUTABLES}:annotations"
     apt "org.immutables:value:${rootProject.ext.VERSION_IMMUTABLES}"
