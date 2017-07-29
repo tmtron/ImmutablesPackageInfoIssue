@@ -3,7 +3,7 @@
 This project reproduces a build issue when we have a multi-module project using the [immutables.io](http://immutables.github.io/) annotation processor and a java `package-info.java` file.  
 
 The project consists of 2 modules:
-* app: android appilication
+* app: android application
   * `@Value.Immutable` is used in [AndroidIm.java](/app/src/main/java/com/example/AndroidIm.java)
 * lib: java module
   * `@Value.Immutable` is used in [JavaIm.java](lib/src/main/java/com/example/JavaIm.java)
@@ -32,4 +32,4 @@ Software Versions:
 * Android gradle plugin: 3.0.0-alpha5
 
 Refrences:
-* [StackOverflow question "immutables-library generates Immutable class twice in different modules"](https://stackoverflow.com/questions/45307591/immutables-library-generates-immutable-class-twice-in-different-modules)
+* [StackOverflow question "Immutables-library generates the same immutable class twice"](https://stackoverflow.com/questions/45393034/immutables-library-generates-the-same-immutable-class-twice)
