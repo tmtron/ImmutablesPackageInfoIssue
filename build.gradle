@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+        maven {
+            // for gradle-apt-plugin
+            url "https://plugins.gradle.org/m2/"
+        }    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha5'
+
+        /* gradle-apt-plugin
+         * this will make sure, that the generated java source files end up in
+         *   build/generated/source/apt/main/com/tmtron/...
+         * (instead of: build/classes/...)
+         *
+         * in plain java-projects, also apply the idea plugin which will make sure that
+         * the Idea IDE also knows and handles all annotation processors on the classpath
+         */
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.10"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+ext {
+    VERSION_IMMUTABLES = '2.5.4'
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
