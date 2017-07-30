@@ -1,6 +1,4 @@
-apply plugin: 'java-library'
-apply plugin: "net.ltgt.apt"
-apply plugin: 'idea'
+apply plugin: 'java'
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
@@ -8,7 +6,7 @@ targetCompatibility = "1.8"
 dependencies {
 
     compileOnly "org.immutables:value:${rootProject.ext.VERSION_IMMUTABLES}:annotations"
-    apt "org.immutables:value:${rootProject.ext.VERSION_IMMUTABLES}"
+    compile "org.immutables:value:${rootProject.ext.VERSION_IMMUTABLES}"
 
     /* in the Java module, we use this to force the immutables annotation processor to use Java 7 code
      * (it includes a dummy R.java file):
