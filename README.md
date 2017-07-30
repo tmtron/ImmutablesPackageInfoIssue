@@ -24,12 +24,15 @@ The Dex error occurs, because `ImmutableJavaIm.java` is generated twice:
 Only currently known workaround is to delete the `package-info.java` file (or clear/comment out its contents)
 
 Notes:
- * the project uses the gradle plugins: `idea` and `net.ltgt.apt`
- 
+ * the java-build also uses the gradle plugins: plugins: `idea` and `net.ltgt.apt`
+ * the branch [java-gradle-plugin-only](https://github.com/tmtron/ImmutablesPackageInfoIssue/tree/java-gradle-plugin-only)
+  does not use those plugins and shows the same error
+ * Full Build output is in [build.txt](build.txt)
+
 Software Versions:
 * Android Studio 3.0 Canary 5
 * Gradle 4.1-milestone-1
 * Android gradle plugin: 3.0.0-alpha5
 
-Refrences:
+References:
 * [StackOverflow question "immutables-library generates Immutable class twice in different modules"](https://stackoverflow.com/questions/45307591/immutables-library-generates-immutable-class-twice-in-different-modules)
