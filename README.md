@@ -27,7 +27,6 @@ Notes:
  * the java-build also uses the gradle plugins: plugins: `idea` and `net.ltgt.apt`
  * the branch [java-gradle-plugin-only](https://github.com/tmtron/ImmutablesPackageInfoIssue/tree/java-gradle-plugin-only)
   does not use those plugins and shows the same error
- * Full Build output is in [build.txt](build.txt)
 
 Software Versions:
 * Android Studio 3.0 Canary 5
@@ -36,3 +35,89 @@ Software Versions:
 
 References:
 * [StackOverflow question "immutables-library generates Immutable class twice in different modules"](https://stackoverflow.com/questions/45307591/immutables-library-generates-immutable-class-twice-in-different-modules)
+
+
+The Full Build output is in [build.txt](build.txt).
+See also: [javc-doc](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html)
+
+**app**: Compiler arguments - simplified:
+```
+-source 1.7
+-target 1.7
+-d ..ImmutablesPackageInfoIssue\app\build\intermediates\classes\debug
+-encoding UTF-8
+-bootclasspath ..\android\SDK\platforms\android-26\android.jar
+-g
+-sourcepath
+-processorpath
+..org.immutables\value\2.5.4\..\value-2.5.4.jar
+-XDuseUnsharedTable=true
+
+-classpath
+..ImmutablesPackageInfoIssue\lib\build\libs\lib.jar;
+..org.immutables\value\2.5.4\..\value-2.5.4-annotations.jar;
+.org.immutables\value\2.5.4\..\value-2.5.4.jar;
+..appcompat-v7-26.0.0.aar\..\jars\classes.jar;
+..constraint-layout-1.0.2.aar\..\jars\classes.jar;
+..animated-vector-drawable-26.0.0.aar\..\jars\classes.jar;
+..support-vector-drawable-26.0.0.aar\..\jars\classes.jar;
+..support-v4-26.0.0.aar\..\jars\classes.jar;
+..support-media-compat-26.0.0.aar\..\jars\classes.jar;
+..support-fragment-26.0.0.aar\..\jars\classes.jar;
+..support-core-utils-26.0.0.aar\..\jars\classes.jar;
+..support-core-ui-26.0.0.aar\..\jars\classes.jar;
+..support-compat-26.0.0.aar\.\jars\classes.jar;
+..\com.android.support\support-annotations\26.0.0\..\support-annotations-26.0.0.jar;
+..\constraint-layout-solver-1.0.2.jar
+
+-s ..ImmutablesPackageInfoIssue\app\build\generated\source\apt\debug
+
+..app\src\main\java\com\example\AndroidIm.java
+..app\src\main\java\com\example\package-info.java
+..app\src\main\java\com\tmtron\immutablespackageinfoissue\MainActivity.java
+..app\build\generated\source\r\debug\android\support\compat\R.java
+..app\build\generated\source\r\debug\android\support\constraint\R.java
+..app\build\generated\source\r\debug\android\support\coreui\R.java
+..app\build\generated\source\r\debug\android\support\coreutils\R.java
+..app\build\generated\source\r\debug\android\support\fragment\R.java
+..app\build\generated\source\r\debug\android\support\graphics\drawable\animated\R.java
+..app\build\generated\source\r\debug\android\support\graphics\drawable\R.java
+..app\build\generated\source\r\debug\android\support\mediacompat\R.java
+..app\build\generated\source\r\debug\android\support\v4\R.java
+..app\build\generated\source\r\debug\android\support\v7\appcompat\R.java
+..app\build\generated\source\r\debug\com\tmtron\immutablespackageinfoissue\R.java
+..app\build\generated\source\buildConfig\debug\com\tmtron\immutablespackageinfoissue\BuildConfig.java
+```
+
+NOTE: `..ImmutablesPackageInfoIssue\lib\build\libs\lib.jar` contains the `ImmutableJavaIm.java` file!!
+
+**lib**
+: Compiler arguments - simplified:
+```
+-source 1.8
+-target 1.8
+-d ..\ImmutablesPackageInfoIssue\lib\build\classes\java\main
+-g
+-sourcepath
+
+-processorpath
+..org.immutables\value\2.5.4\..\value-2.5.4.jar;
+..org.immutables\value\2.5.4\..\value-2.5.4-annotations.jar;
+..org.immutables\android-stub\2.5.4\.\android-stub-2.5.4.jar
+
+-XDuseUnsharedTable=true
+
+-classpath
+..org.immutables\value\2.5.4\..\value-2.5.4.jar;
+..org.immutables\value\2.5.4\..\value-2.5.4-annotations.jar;
+..org.immutables\android-stub\2.5.4\..\android-stub-2.5.4.jar
+
+..ImmutablesPackageInfoIssue\lib\src\main\java\com\example\JavaIm.java
+```
+
+Since there is no `-s` argument to specify where to save the generated files,
+they end up in the build output and thus `ImmutableJavaIm.java` will be in:
+`ImmutablesPackageInfoIssue\lib\build\classes\java\main\com\example`.
+ Which in turn means, that it will be packaged in the lib-jar.
+
+
